@@ -5,3 +5,24 @@ class Card{
         return this;
     }
 }
+
+class Unit extends Card{
+    constructor(name, cost, power, resilience){
+        super(name, cost);
+        this.power = power;
+        this.resilience = resilience;
+        return this;
+    }
+
+    attack(target){
+        target.resilience -= this.power;
+        return this;
+    }
+}
+
+class Effects extends Card{
+    constructor(name, cost){
+        super(name, cost);
+        return this;
+    }
+}
