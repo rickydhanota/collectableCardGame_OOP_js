@@ -15,14 +15,36 @@ class Unit extends Card{
     }
 
     attack(target){
-        target.resilience -= this.power;
-        return this;
+        if(target instanceof Unit){
+            target.resilience -= this.power;
+            return this;
+        }
+        else{
+            throw new Error( "Target must be a unit!" );
+        }
     }
 }
 
 class Effects extends Card{
-    constructor(name, cost){
+    constructor(name, cost, power, resilience){
         super(name, cost);
+        this.power = power;
+        this.resilience = resilience;
         return this;
+    }
+    addStatIncrease(target){
+        if(target instanceof Unit){
+            if(power){
+                target.power += this.power;
+                return this;
+            }
+            else if(this.resilience){
+                target.resilience += this.resilience;
+                return this;
+            }
+        }
+        else{
+            throw new Error( "Target must be a unit!" );
+        }
     }
 }
