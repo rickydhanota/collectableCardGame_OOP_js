@@ -4,6 +4,10 @@ class Card{
         this.cost = cost;
         return this;
     }
+    displayCardDetails(){
+        console.log(`Card Name: ${this.name}, and this Card's Cost is ${this.cost}`);
+        return this;
+    }
 }
 
 class Unit extends Card{
@@ -26,10 +30,11 @@ class Unit extends Card{
 }
 
 class Effects extends Card{
-    constructor(name, cost, power, resilience){
+    constructor(name, cost, text, stat, magnitude){
         super(name, cost);
-        this.power = power;
-        this.resilience = resilience;
+        this.text = text;
+        this.stat = stat;
+        this.magnitude = magnitude;
         return this;
     }
     addStatIncrease(target){
@@ -38,8 +43,8 @@ class Effects extends Card{
                 target.power += this.power;
                 return this;
             }
-            else if(this.resilience){
-                target.resilience += this.resilience;
+            else if(this.magnitude){
+                target.resilience += this.magnitude;
                 return this;
             }
         }
@@ -48,3 +53,10 @@ class Effects extends Card{
         }
     }
 }
+
+const redBeltNinja = new Unit("Red Belt Ninja", 3, 3, 4);
+const blackBeltNinja = new Unit("Black Belt Ninja", 4, 5, 4);
+const hardAlgorithm = new Effects("Hard Algorithm", 2, "increase target's resilience by 3", "resilience", 3);
+const unhandledPromiseRejection = new Effects("Unhandled Promise Rejection", 1, "reduce target's resilience by 2", "resilience", -2);
+const pairProgramming = new Effects("Pair Programming", 3, "increase target's power by 2", "Power", 2);
+
