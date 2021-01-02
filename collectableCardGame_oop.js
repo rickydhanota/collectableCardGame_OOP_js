@@ -21,6 +21,7 @@ class Unit extends Card{
     attack(target){
         if(target instanceof Unit){
             target.resilience -= this.power;
+            console.log(`${target.name} was attacked for ${this.power} damage!! ${target.name} resilience has changed to ${target.resilience}`);
             return this;
         }
         else{
@@ -42,10 +43,12 @@ class Effects extends Card{
         if(target instanceof Unit){
             if(this.stat == "Power"){
                 target.power += this.power;
+                console.log(`${target.name} has had its Power changed to ${target.power}`);
                 return this;
             }
             else if(this.stat == "Resilience"){
-                target.resilience += this.magnitude;
+                target.resilience += this.resilience;
+                console.log(`${target.name} has had its Resilience changed to ${target.resilience}`);
                 return this;
             }
         }
@@ -62,4 +65,8 @@ const unhandledPromiseRejection = new Effects("Unhandled Promise Rejection", 1, 
 const pairProgramming = new Effects("Pair Programming", 3, "increase target's power by 2", "Power", 2, 0);
 
 redBeltNinja.summonCard()
+hardAlgorithm.cardEffect(redBeltNinja);
 blackBeltNinja.summonCard()
+unhandledPromiseRejection.cardEffect(redBeltNinja);
+pairProgramming.cardEffect(redBeltNinja);
+redBeltNinja.attack(blackBeltNinja);
