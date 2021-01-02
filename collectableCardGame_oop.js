@@ -37,7 +37,7 @@ class Effects extends Card{
         this.magnitude = magnitude;
         return this;
     }
-    addStatIncrease(target){
+    resilienceEffect(target){
         if(target instanceof Unit){
             if(power){
                 target.power += this.power;
@@ -45,6 +45,22 @@ class Effects extends Card{
             }
             else if(this.magnitude){
                 target.resilience += this.magnitude;
+                return this;
+            }
+        }
+        else{
+            throw new Error( "Target must be a unit!" );
+        }
+    }
+
+    powerEffect(target){
+        if(target instanceof Unit){
+            if(power){
+                target.power += this.power;
+                return this;
+            }
+            else if(this.magnitude){
+                target.power += this.magnitude;
                 return this;
             }
         }
